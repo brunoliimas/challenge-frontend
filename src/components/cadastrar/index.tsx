@@ -1,42 +1,52 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '../UI/button';
+import { Input } from '../UI/input';
 
 
-type InputProps = {
-    label: string;
-    id: string;
-    type: string;
-    value: string;
-    placeholder: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
 
-const Input = ({ label, id, type, value, placeholder, onChange }: InputProps) => {
-    return (
-        <div className='flex flex-col mb-6'>
-            <label htmlFor={id} className='mb-2'>{label}</label>
-            <input
-                type={type}
-                id={id}
-                value={value}
-                placeholder={placeholder}
-                className='px-2 py-1 rounded-md text-black'
-                onChange={onChange}
-            />
-        </div>
-    );
+
+interface Produto {
+    nome: string;
+    preco: number;
 }
-
-
 
 export default function Cadastrar() {
     const [nomeProduto, setNomeProduto] = useState('');
     const [precoProduto, setPrecoProduto] = useState('');
+    const [listaProdutos, setListaProdutos] = useState<Produto[]>([]);
+
+
+    useEffect(() => {
+        const produtosString = localStorage.getItem('listaProdutos');
+        if (produtosString) {
+            const produtos: Produto[] = JSON.parse(produtosString);
+            setListaProdutos(produtos);
+        }
+    }, []);
 
     const handleAdicionarProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log("Clicou");
+
+        if (nomeProduto.trim() === '' || precoProduto.trim() === '') {
+            alert('Por favor, preencha todos os campos antes de adicionar um produto.');
+            setNomeProduto('');
+            setPrecoProduto('');
+            return;
+        }
+
+        const novoProduto = {
+            nome: nomeProduto,
+            preco: parseFloat(precoProduto),
+        };
+
+        const novaListaProdutos = [...listaProdutos, novoProduto];
+        localStorage.setItem('listaProdutos', JSON.stringify(novaListaProdutos));
+
+        setListaProdutos(novaListaProdutos);
+
+        setNomeProduto('');
+        setPrecoProduto('');
     };
 
     return (
@@ -60,7 +70,12 @@ export default function Cadastrar() {
                     onChange={(e) => setPrecoProduto(e.target.value)}
                 />
                 <div className='w-full mt-10 flex justify-end'>
-                    <Button nav={false} onClick={handleAdicionarProduto} name='Adicionar Produto' link='/' />
+                    <Button
+                        nav={false}
+                        onClick={handleAdicionarProduto}
+                        name='Adicionar Produto'
+                        link='/'
+                    />
                 </div>
             </form>
         </div>
