@@ -33,7 +33,13 @@ export default function ListaProdutos() {
                 nextPageName='Carrinho'
                 nextPageLink='carrinho'
             />
-            <Produtos produtos={listaProdutos} />
+            {listaProdutos.length === 0 ? (
+                <div className='flex items-center justify-center mt-10'>
+                    <h3 className='text-2xl font-semibold'>Sem produtos na lista</h3>
+                </div>
+            ) : (
+                <Produtos produtos={listaProdutos} />
+            )}
         </div>
     );
 };
