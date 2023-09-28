@@ -5,10 +5,6 @@ import Carrinho from '@/components/carrinho';
 
 export default function Comprar () {
 
-    const handleComprar = () => {
-        
-    };
-
     return (
         <>
             <Header

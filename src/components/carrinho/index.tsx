@@ -1,12 +1,15 @@
 'use client'
 import { useEffect, useState } from 'react';
-import { Produto } from '../produtos';
-import { Button } from '../UI/button';
 import { AiFillDelete } from 'react-icons/ai';
-import { BsCartFill } from 'react-icons/bs';
+import { Button } from '../UI/button';
+import { Produto } from '../produtos';
+import { useRouter } from 'next/navigation';
+
 
 export default function Carrinho() {
     const [carrinho, setCarrinho] = useState<Produto[]>([]);
+    const router = useRouter();
+
 
     useEffect(() => {
         const carregarCarrinho = () => {
@@ -23,9 +26,21 @@ export default function Carrinho() {
         novoCarrinho.splice(index, 1);
 
         setCarrinho(novoCarrinho);
-
         localStorage.setItem('carrinho', JSON.stringify(novoCarrinho));
+
+
     };
+
+    const handleCheckout = () => {
+
+        setCarrinho([]);
+        localStorage.removeItem('carrinho');
+
+        alert('Compra finalizada com sucesso!');
+        router.push('/');
+    };
+
+
 
     return (
         <div className='container h-screen flex flex-col items-center py-10'>
@@ -40,7 +55,7 @@ export default function Carrinho() {
                         </tr>
                     </thead>
                     <tbody>
-                    {carrinho.map((produto: Produto, index: number) => (
+                        {carrinho.map((produto: Produto, index: number) => (
                             <tr className="border border-black" key={index}>
                                 <td className="py-2">{produto.nome}</td>
                                 <td className="py-2">R$ {produto.preco.toFixed(2)}</td>
@@ -57,6 +72,15 @@ export default function Carrinho() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className='mt-10'>
+                <Button
+                    name='Finalizar compra'
+                    nav={false}
+                    link=''
+                    className='bg-green-600 py-3 px-6'
+                    onClick={handleCheckout}
+                />
             </div>
         </div>
     );

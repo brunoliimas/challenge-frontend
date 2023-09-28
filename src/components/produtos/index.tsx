@@ -53,7 +53,7 @@ export default function Produtos({ produtos, setProdutos }: ListaProdutosProps) 
                                         link=""
                                     />
                                     <Button
-                                        className='p-3 text-white bg-green-700'
+                                        className='p-3 text-white bg-green-600'
                                         icon={BsCartFill}
                                         nav={false}
                                         onClick={() => addToCart(produto)}
