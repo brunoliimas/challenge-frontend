@@ -1,64 +1,21 @@
 "use client"
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Produto } from "@/types/product.type";
 import { AiFillDelete } from "react-icons/ai";
-import { toast } from "react-toastify";
 import { Button } from "../UI/button";
-import { Produto } from "../produtos";
 
+interface CarrinhoProps {
+    carrinho: Produto[];
+    calculateTotal: string;
+    deleteItem(index: number): void;
+    checkout(): void;
+}
 
-export default function Carrinho() {
-    const [carrinho, setCarrinho] = useState<Produto[]>([]);
-    const router = useRouter();
+export default function Comprar({ carrinho, calculateTotal, deleteItem, checkout }: CarrinhoProps) {
+    const calculateTotalValue = (): string => calculateTotal;
 
+    const handleDeleteFromCart = (index: number) => deleteItem(index);
 
-    useEffect(() => {
-        const carregarCarrinho = () => {
-            const carrinhoLocalStorage = localStorage.getItem("carrinho");
-            const carrinhoInicial = carrinhoLocalStorage ? JSON.parse(carrinhoLocalStorage) : [];
-            setCarrinho(carrinhoInicial);
-        };
-
-        carregarCarrinho();
-    }, []);
-
-
-
-    const calculateTotalValue = () => {
-        let total = 0;
-        carrinho.forEach((produto) => {
-            total += produto.preco;
-        });
-
-        return total.toFixed(2); 
-    };
-
-
-
-    const handleDeleteFromCart = (index: number) => {
-        const novoCarrinho = [...carrinho];
-        novoCarrinho.splice(index, 1);
-
-        toast.error("Produto deletado do carrinho!");
-
-        setCarrinho(novoCarrinho);
-        localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
-    };
-
-
-
-    const handleCheckout = () => {
-
-        toast.success(`Compra finalizada com sucesso! Valor total da compra de R$ ${calculateTotalValue()}`);
-        setCarrinho([]);
-        localStorage.removeItem("carrinho");
-
-        setTimeout(() => {
-            router.push("/");
-        }, 2000);
-    };
-
-
+    const handleCheckout = () => checkout();
 
     return (
         <div className="container h-screen flex flex-col items-center py-10">
@@ -78,7 +35,7 @@ export default function Carrinho() {
                             </tr>
                         </thead>
                         <tbody>
-                            {carrinho.map((produto: Produto, index: number) => (
+                            {carrinho.map((produto, index: number) => (
                                 <tr className="border border-black" key={index}>
                                     <td className="py-2">{produto.nome}</td>
                                     <td className="py-2">R$ {produto.preco.toFixed(2)}</td>

@@ -1,37 +1,25 @@
 import { AiFillDelete } from "react-icons/ai";
 import { BsCartFill } from "react-icons/bs";
-import { Button } from "../UI/button";
 import { toast } from "react-toastify";
-
-export interface Produto {
-    nome: string;
-    preco: number;
-}
+import { Button } from "../UI/button";
+import { Produto } from "@/types/product.type";
 
 export interface ListaProdutosProps {
     produtos: Produto[];
-    setProdutos: React.Dispatch<React.SetStateAction<Produto[]>>;
+    onAddCart(prod: Produto): void;
+    onDeleteProduct(index: number): void;
 }
 
-export default function Produtos({ produtos, setProdutos }: ListaProdutosProps) {
+export default function Listar({ produtos, onAddCart, onDeleteProduct }: ListaProdutosProps) {
 
-    const handleDeleteProduct = (index: number) => {
-        const produtosAtualizados = [...produtos];
-        produtosAtualizados.splice(index, 1);
-        setProdutos(produtosAtualizados);
-
+    const deleteProduct = (index: number) => {
+        onDeleteProduct(index);
         toast.error("Produto deletado!");
-
-        localStorage.setItem("listaProdutos", JSON.stringify(produtosAtualizados));
     };
 
-    const addToCart = (produto: Produto) => {
-        const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
-        carrinho.push(produto);
-
+    const addToCart = (produto: Produto): void => {
+        onAddCart(produto);
         toast.success("Produto adicionado ao carrinho com sucesso!");
-
-        localStorage.setItem("carrinho", JSON.stringify(carrinho));
     };
 
     return (
@@ -56,7 +44,7 @@ export default function Produtos({ produtos, setProdutos }: ListaProdutosProps) 
                                         className="p-3 text-white bg-red-500 mr-4"
                                         icon={AiFillDelete}
                                         nav={false}
-                                        onClick={() => handleDeleteProduct(index)}
+                                        onClick={() => deleteProduct(index)}
                                         link=""
                                     />
                                     <Button

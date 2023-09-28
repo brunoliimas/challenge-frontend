@@ -1,53 +1,20 @@
-"use client"
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button } from "../UI/button";
 import { Input } from "../UI/input";
-import { toast } from "react-toastify"
 
+interface CadastrarProdutoProps {
+    setPrecoProduto: (value: string) => void;
+    precoProduto: string;
+    setNomeProduto: (value: string) => void;
+    nomeProduto: string;
+    onAddProduto: () => void;
+} 
 
+export default function Cadastrar({ setPrecoProduto, precoProduto, setNomeProduto, nomeProduto, onAddProduto }: CadastrarProdutoProps) {
 
-
-interface Produto {
-    nome: string;
-    preco: number;
-}
-
-export default function Cadastrar() {
-    const [nomeProduto, setNomeProduto] = useState("");
-    const [precoProduto, setPrecoProduto] = useState("");
-    const [listaProdutos, setListaProdutos] = useState<Produto[]>([]);
-
-
-    useEffect(() => {
-        const produtosString = localStorage.getItem("listaProdutos");
-        if (produtosString) {
-            const produtos: Produto[] = JSON.parse(produtosString);
-            setListaProdutos(produtos);
-        }
-    }, []);
-
-    const handleAddProduto = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleAddProduct = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
-
-        if (nomeProduto.trim() === "" || precoProduto.trim() === "") {
-            toast.warn("Por favor, preencha todos os campos antes de adicionar um produto.");
-            setNomeProduto("");
-            setPrecoProduto("");
-            return;
-        }
-
-        const novoProduto = {
-            nome: nomeProduto,
-            preco: parseFloat(precoProduto),
-        };
-
-        const novaListaProdutos = [...listaProdutos, novoProduto];
-        localStorage.setItem("listaProdutos", JSON.stringify(novaListaProdutos));
-
-        setListaProdutos(novaListaProdutos);
-        toast.success("Produto cadastrado com sucesso!");
-        setNomeProduto("");
-        setPrecoProduto("");
+        onAddProduto();
     };
 
     return (
@@ -74,15 +41,12 @@ export default function Cadastrar() {
                     <Button
                         className="py-3 px-6"
                         nav={false}
-                        onClick={handleAddProduto}
+                        onClick={handleAddProduct}
                         name="Adicionar Produto"
-                        link="/"
+                        link=""
                     />
                 </div>
             </form>
         </div>
     );
 }
-
-
-

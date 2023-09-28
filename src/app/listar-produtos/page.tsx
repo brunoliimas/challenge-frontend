@@ -1,14 +1,10 @@
 "use client"
 import { Header } from "@/components/UI/header";
-import Produtos from "@/components/produtos";
+import Produtos from "@/components/listar";
+import { Produto } from "@/types/product.type";
 import { useEffect, useState } from "react";
 
-interface Produto {
-    nome: string;
-    preco: number;
-}
-
-export default function ListaProdutos() {
+export default function ListarProdutos() {
     const [listaProdutos, setListaProdutos] = useState<Produto[]>([]);
 
     const loadListaProdutos = () => {
@@ -16,6 +12,21 @@ export default function ListaProdutos() {
         if (listaProdutosLocalStorage) {
             setListaProdutos(JSON.parse(listaProdutosLocalStorage));
         }
+    };
+
+    const handleDeleteProduct = (index: number) => {
+        const produtosAtualizados = [...listaProdutos];
+        produtosAtualizados.splice(index, 1);
+        setListaProdutos(produtosAtualizados);
+
+        localStorage.setItem("listaProdutos", JSON.stringify(produtosAtualizados));
+    };
+
+    const addToCart = (produto: Produto) => {
+        const carrinho = JSON.parse(localStorage.getItem("carrinho") || "[]");
+        carrinho.push(produto);
+
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
     };
 
     useEffect(() => {
@@ -35,7 +46,11 @@ export default function ListaProdutos() {
                     <h3 className="text-2xl font-semibold">Sem produtos na lista</h3>
                 </div>
             ) : (
-                <Produtos produtos={listaProdutos} setProdutos={setListaProdutos} />
+                <Produtos
+                    produtos={listaProdutos}
+                    onAddCart={addToCart}
+                    onDeleteProduct={handleDeleteProduct}
+                />
             )}
         </div>
     );
