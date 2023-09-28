@@ -10,7 +10,6 @@ export default function Comprar () {
             <Header
                 prevPageName='Produtos'
                 prevPageLink='listar-produtos'
-                // nextPageName='Início'
                 nextPageLink='/'
             />
             <Carrinho />
