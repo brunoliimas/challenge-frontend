@@ -18,7 +18,7 @@ export default function Cadastrar({ setPrecoProduto, precoProduto, setNomeProdut
     };
 
     return (
-        <div className="container h-screen flex flex-col items-center py-10">
+        <div className="container flex flex-col items-center py-10">
             <h1 className="text-3xl">Cadastrar produtos</h1>
             <form className="w-full max-w-2xl mt-10 p-10 bg-mission-blue rounded-xl shadow-xl">
                 <Input

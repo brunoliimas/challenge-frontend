@@ -23,7 +23,7 @@ export default function Listar({ produtos, onAddCart, onDeleteProduct }: ListaPr
     };
 
     return (
-        <div className="container h-screen flex flex-col items-center py-10">
+        <div className="container flex flex-col items-center py-10">
             <h1 className="text-3xl">Lista de produtos</h1>
             <div className="w-full max-w-2xl mt-10 p-6 bg-mission-blue rounded-xl shadow-xl">
                 <table className="table-auto border border-black w-full text-center bg-white text-black">

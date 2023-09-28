@@ -18,7 +18,7 @@ export default function Comprar({ carrinho, calculateTotal, deleteItem, checkout
     const handleCheckout = () => checkout();
 
     return (
-        <div className="container h-screen flex flex-col items-center py-10">
+        <div className="container flex flex-col items-center py-10">
             <h1 className="text-3xl">Carrinho</h1>
             {carrinho.length === 0 ? (
                 <div className="flex items-center justify-center mt-10">
