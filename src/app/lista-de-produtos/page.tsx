@@ -38,7 +38,7 @@ export default function ListaProdutos() {
                     <h3 className='text-2xl font-semibold'>Sem produtos na lista</h3>
                 </div>
             ) : (
-                <Produtos produtos={listaProdutos} />
+                <Produtos produtos={listaProdutos} setProdutos={setListaProdutos} />
             )}
         </div>
     );
