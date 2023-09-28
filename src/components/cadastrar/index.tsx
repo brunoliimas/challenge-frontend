@@ -39,7 +39,7 @@ export default function Cadastrar({ setPrecoProduto, precoProduto, setNomeProdut
                 />
                 <div className="w-full mt-10 flex justify-end">
                     <Button
-                        className="py-3 px-6"
+                        className="py-3 px-6 bg-mission-blue-light"
                         nav={false}
                         onClick={handleAddProduct}
                         name="Adicionar Produto"

@@ -61,7 +61,7 @@ export default function Comprar({ carrinho, calculateTotal, deleteItem, checkout
                             name="Finalizar compra"
                             nav={false}
                             link=""
-                            className="bg-green-600 py-3 px-6"
+                            className="bg-mission-blue-light py-3 px-6"
                             onClick={handleCheckout}
                         />
                     </div>
