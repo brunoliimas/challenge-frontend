@@ -1,4 +1,7 @@
+import { AiFillDelete } from 'react-icons/ai';
+import { BsCartFill } from 'react-icons/bs';
 import { Button } from "../UI/button";
+
 
 interface Produto {
     nome: string;
@@ -36,13 +39,26 @@ export default function Produtos({ produtos, setProdutos }: ListaProdutosProps) 
                                 <td className="py-2">{produto.nome}</td>
                                 <td className="py-2">R$ {produto.preco.toFixed(2)}</td>
                                 <td className="py-2">
-                                    <Button nav={false} name="Apagar" onClick={() => handleDeleteProduto(index)} link=""/>
+                                    <Button
+                                        className='px-3 text-white bg-red-500 mr-4'
+                                        icon={AiFillDelete}
+                                        nav={false}
+                                        onClick={() => handleDeleteProduto(index)}
+                                        link=""
+                                    />
+                                    <Button
+                                        className='px-3 text-white bg-green-700'
+                                        icon={BsCartFill}
+                                        nav={false}
+                                        onClick={() => (console.log("add ao carrinho"))}
+                                        link=""
+                                    />
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                
+
             </div>
         </div>
     );

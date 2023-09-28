@@ -1,14 +1,17 @@
 import Link from "next/link"
+import { IconType } from "react-icons"
 
 type ButtonProps = {
     nav: boolean
     link: string
-    name: string
+    name?: string
     className?: string
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+    icon?: IconType;
 }
 
-export const Button = ({ nav, onClick, link, name, className }: ButtonProps) => {
+export const Button = ({icon: Icon, nav, onClick, link, name, className }: ButtonProps) => {
+    const renderIcon = Icon ? <Icon size={24} /> : null;
     return (
         <button onClick={nav ? undefined : onClick} className={`text-center bg-mission-blue-light shadow-lg py-3 px-6 rounded-full font-semibold ${className}`}>
             {nav ?
@@ -17,6 +20,7 @@ export const Button = ({ nav, onClick, link, name, className }: ButtonProps) => 
                 </Link>
                 :
                 <span>
+                    {renderIcon}
                     {name}
                 </span>
             }
