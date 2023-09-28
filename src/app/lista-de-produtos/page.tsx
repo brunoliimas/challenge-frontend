@@ -21,7 +21,6 @@ export default function ListaProdutos() {
         }
     };
 
-    // Use useEffect para carregar a lista de produtos quando a página for carregada
     useEffect(() => {
         carregarListaProdutos();
     }, []);
