@@ -9,14 +9,14 @@ type InputProps = {
 
 export const Input = ({ label, id, type, value, placeholder, onChange }: InputProps) => {
     return (
-        <div className='flex flex-col mb-6'>
-            <label htmlFor={id} className='mb-2'>{label}</label>
+        <div className="flex flex-col mb-6">
+            <label htmlFor={id} className="mb-2">{label}</label>
             <input
                 type={type}
                 id={id}
                 value={value}
                 placeholder={placeholder}
-                className='px-2 py-1 rounded-md text-black'
+                className="px-2 py-1 rounded-md text-black"
                 onChange={onChange}
             />
         </div>

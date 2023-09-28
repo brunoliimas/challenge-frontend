@@ -15,7 +15,7 @@ export const Header = ({ prevPageName, prevPageLink, nextPageName, nextPageLink 
                     <Link href={prevPageLink}>{prevPageName}</Link>
                 </div>
                 <Image
-                    src='/logo-white-shop.svg'
+                    src="/logo-white-shop.svg"
                     alt="Mission Shop"
                     width={50}
                     height={56}
