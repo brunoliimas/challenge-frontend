@@ -71,6 +71,7 @@ export default function Cadastrar() {
                 />
                 <div className='w-full mt-10 flex justify-end'>
                     <Button
+                        className='py-3 px-6'
                         nav={false}
                         onClick={handleAdicionarProduto}
                         name='Adicionar Produto'

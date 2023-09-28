@@ -13,7 +13,7 @@ export default function Home() {
                     height={223}
                     className='drop-shadow-xl'
                 />
-                <Button nav className='mt-10' name='Cadastrar Produto' link='cadastrar-produtos'/>
+                <Button nav className='mt-10 py-3 px-6' name='Cadastrar Produto' link='cadastrar-produtos'/>
             </div>
         </main>
     );

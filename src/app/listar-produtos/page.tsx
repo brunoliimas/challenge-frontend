@@ -1,20 +1,17 @@
-// components/ListaProdutos.tsx
 'use client'
 import { Header } from '@/components/UI/header';
-import { useEffect, useState } from 'react';
 import Produtos from '@/components/produtos';
-
+import { useEffect, useState } from 'react';
 
 interface Produto {
     nome: string;
     preco: number;
 }
 
-
 export default function ListaProdutos() {
     const [listaProdutos, setListaProdutos] = useState<Produto[]>([]);
 
-    const carregarListaProdutos = () => {
+    const loadListaProdutos = () => {
         const listaProdutosLocalStorage = localStorage.getItem('listaProdutos');
         if (listaProdutosLocalStorage) {
             setListaProdutos(JSON.parse(listaProdutosLocalStorage));
@@ -22,15 +19,16 @@ export default function ListaProdutos() {
     };
 
     useEffect(() => {
-        carregarListaProdutos();
+        loadListaProdutos();
     }, []);
+
     return (
         <div>
             <Header
                 prevPageName='Cadastrar'
                 prevPageLink='cadastrar-produtos'
                 nextPageName='Carrinho'
-                nextPageLink='carrinho'
+                nextPageLink='comprar-produtos'
             />
             {listaProdutos.length === 0 ? (
                 <div className='flex items-center justify-center mt-10'>
@@ -41,5 +39,4 @@ export default function ListaProdutos() {
             )}
         </div>
     );
-};
-
+}

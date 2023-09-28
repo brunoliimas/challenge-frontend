@@ -9,7 +9,7 @@ export default function CadastroProdutos () {
                 prevPageName='Início'
                 prevPageLink='/'
                 nextPageName='Produtos'
-                nextPageLink='lista-de-produtos' />
+                nextPageLink='listar-produtos' />
             <Cadastrar />
         </>
     );

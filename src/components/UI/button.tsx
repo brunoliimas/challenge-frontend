@@ -13,7 +13,7 @@ type ButtonProps = {
 export const Button = ({icon: Icon, nav, onClick, link, name, className }: ButtonProps) => {
     const renderIcon = Icon ? <Icon size={24} /> : null;
     return (
-        <button onClick={nav ? undefined : onClick} className={`text-center bg-mission-blue-light shadow-lg py-3 px-6 rounded-full font-semibold ${className}`}>
+        <button onClick={nav ? undefined : onClick} className={`text-center bg-mission-blue-light shadow-lg rounded-full font-semibold ${className}`}>
             {nav ?
                 <Link href={link} >
                     {name}
